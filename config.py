@@ -1,8 +1,17 @@
 import tweepy
 import logging
-from credentials import credentials
+import credentials
 # logging config
-logging.basicConfig(filename='authentication.log',level=logging.INFO,format='%(asctime)s   %(message)s %(lineno)d %(pathname)s ')
+logger=logging.getLogger(__name__)
+logger.setLevel(logging.WARNING)
+
+formatter = logging.Formatter(' %(levelname)s: %(name)s:  %(asctime)s   %(message)s')
+
+file_handler= logging.FileHandler('authentication.log')
+file_handler.setFormatter(formatter)
+logger.addHandler(file_handler) 
+
+
 
 # creating config module
 def create_api():
@@ -20,9 +29,9 @@ def create_api():
     api=tweepy.API(auth,wait_on_rate_limit=True,wait_on_rate_limit_notify=True)
     try:
         api.verify_credentials()
-        logging.info('verified')
+        logger.warning('verified')
     except Exception:
-        logging.info('not verified',exc_info=True)
+        logger.warning('not verified',exc_info=True)
     return api
     
         
