@@ -1,6 +1,6 @@
 import tweepy
 import logging
-import credentials
+from credentials import credentials
 # logging config
 logger=logging.getLogger(__name__)
 logger.setLevel(logging.WARNING)

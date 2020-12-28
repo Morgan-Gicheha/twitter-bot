@@ -33,14 +33,12 @@ class FavRetweetListener(tweepy.StreamListener):
                 print("Error on fav and retweet", e)
 
 
-def main(keywords):
+def main_(keywords):
     api = create_api()
     tweets_listener = FavRetweetListener(api)
     stream = tweepy.Stream(api.auth, tweets_listener)
     stream.filter(track=keywords, languages=["en"])
-
-if __name__ == "__main__":
-    main([" python flask"])
+ 
 
             
 
